@@ -1,28 +1,61 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>What's up</h2>
+    <h1>Welcome to our website {{ user.username }}</h1>
+    <my-component v-if="bull"></my-component>
+
+
+    <div class="">
+      Username: <input type="text" v-model="user.username">
+      Firstname: <input type="text" v-model="user.firstname">
+      Lastname: <input type="text" v-model="user.lastname">
+    </div>
+
+    <br>
+
+    <div class="">
+      email: <input type="email" v-model="user.email">
+      password: <input type="password" v-model="user.password">
+    </div>
+
+    <p>
+      Display my boolean: {{bull}}
+    </p>
+
+    <p>
+      <button @click="toggleBull">Show Paragraph</button>
+    </p>
+
+    <h3 v-if="bull">Hello, {{user.firstname }} {{user.lastname}}. You are logged in as {{user.username}} with email: {{user.email}}. We're glad to have you.</h3>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MyComponent from './components/myComponent.vue';
 export default {
-  name: 'app',
+  data() {
+    return {
+      user: {
+        username: '',
+        firstname: '',
+        lastnamme: '',
+        email: '',
+        password: ''
+      },
+      bull: true
+    };
+  },
+  methods: {
+    toggleBull() {
+      this.bull = !this.bull;
+    }
+  },
   components: {
-    HelloWorld
+    MyComponent
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
